@@ -6,11 +6,11 @@
       </div>
       <div class="input-field">
         <span>Nickname:</span>
-        <input type="text" />
+        <input type="text" placeholder="    Enter your nickname" />
       </div>
       <div class="input-field">
         <span>Password:</span>
-        <input type="password" />
+        <input type="password" placeholder="    Enter your password" />
       </div>
       <div class="button">
         <button>Submit !</button>
