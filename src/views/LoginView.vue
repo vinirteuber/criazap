@@ -74,14 +74,7 @@ span {
   height: 50px;
   width: 200px;
   margin-top: 10%;
-  background: linear-gradient(
-    to left,
-    #a79ca1,
-    #e2c3c6,
-    #eecfc4,
-    #f8e6c6,
-    #ffffcc
-  );
+ 
   color: #181616;
 }
 
