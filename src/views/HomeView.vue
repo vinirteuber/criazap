@@ -1,9 +1,38 @@
+<script>
+import Sidebar from "@/components/Sidebar.vue";
+import axios from "axios";
+import { mapState} from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
+export default { 
+  data() {
+    return {
+      user: {
+        username: "",
+      },
+      superuser: "",
+    };
+  },
+    components: { Sidebar},
+ 
+  async created() {
+    const res = await axios.get(
+      `http://localhost:8000/usuario/${this.id}/`
+    );
+    this.user = res.data;
+    console.log(this.user);
+  },
+  computed: {
+    ...mapState(useAuthStore, ["id", "username", "is_superuser"]),
+  },
+  };
+    </script>
 <template>
   <Sidebar />
   <main class="home-page">
     <div class="head">
         <i class="fa-solid fa-user"></i>
-        <span>Jaummdazs</span>
+        <span>{{user.username}}</span>
     </div>
     <div class="mensages"></div>
     <div class="send-mensage">
@@ -12,13 +41,6 @@
     </div>
   </main>
 </template>
-<script>
-import Sidebar from "@/components/Sidebar.vue";
-
-export default {
-  components: { Sidebar },
-};
-</script>
 <style scoped>
 .home-page {
   width: 100vw;
