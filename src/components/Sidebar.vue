@@ -1,9 +1,30 @@
+<script>
+import axios from "axios";
+import { mapState } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+  export default {
+    name: "SIDEBAR",
+    user: {
+    username:"",
+   },
+  async created() {
+    const res = await axios.get(`http://localhost:8000/usuario/${this.id}/`);
+    this.user = res.data;
+    console.log(this.user);
+  },
+  computed: {
+    ...mapState(useAuthStore, ["id", "username"]),
+  },
+        };
+</script>
+
 <template>
   <aside>
     <div class="shield">
       <div class="perfil">
         <i class="fa-solid fa-user"></i>
         <span>Meu Perfil</span>
+        <h1>{{ username }}</h1>
       </div>
       <div class="status">
         <i class="fa-regular fa-pen-to-square"></i>
@@ -25,11 +46,6 @@
   </aside>
 </template>
 
-<script>
-export default {
-  name: "SIDEBAR",
-};
-</script>
 
 <style scoped>
 span {
