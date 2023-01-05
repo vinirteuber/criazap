@@ -1,3 +1,26 @@
+<script>
+import { mapActions } from "pinia";
+import { useAuthStore } from "../stores/auth";
+export default {
+  data() {
+    return {
+      user: {},
+    };
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["login"]),
+    async submitLogin() {
+      try {
+        await this.login(this.user);
+        this.$router.push("/");
+      } catch {
+        alert("Usuário ou senha invalidos!");
+      }
+    },
+  },
+};
+</script>
+
 <template>
   <div class="all">
     <div class="container">
@@ -6,14 +29,21 @@
       </div>
       <div class="input-field">
         <span>Nickname:</span>
-        <input type="text" placeholder="    Enter your nickname" />
+        <input
+        @keydown.enter="submitLogin()"
+        v-model="user.username"  
+        type="text" 
+        placeholder="    Enter your nickname" />
       </div>
       <div class="input-field">
         <span>Password:</span>
-        <input type="password" placeholder="    Enter your password" />
+        <input @keydown.enter="submitLogin()"
+        v-model="user.password"  
+        type="password" 
+        placeholder="    Enter your password" />
       </div>
       <div class="button">
-        <button>Submit !</button>
+        <button @click="submitLogin()">Submit !</button>
       </div>
     </div>
     <section class="images">
